@@ -1,0 +1,479 @@
+﻿CREATE TABLE COUNTRY(COUNTRY_CODE CHAR(4) CONSTRAINT COUNTRY_CODE_PK PRIMARY KEY,
+                     COUNTRY_NAME varchar(15),
+                     REGION varchar(15));
+CREATE TABLE CATEGORY(CATEGORY_CODE CHAR(4) CONSTRAINT CATEGORY_CODE_PK PRIMARY KEY,
+                       CATEGORY_DESC varchar(20));
+CREATE TABLE CUSTOMER(CUSTOMER_CODE CHAR(4) PRIMARY KEY,
+                      CUSTOMER_NAME varchar(20),
+                      CREDIT_LIMIT varchar(20));
+CREATE TABLE BRANCH(BRANCH_CODE CHAR(4) CONSTRAINT BRANCH_CODE_PK PRIMARY KEY,
+                    BRANCH_NAME varchar(15),
+                    COUNTRY_CODE CHAR(4) REFERENCES COUNTRY(COUNTRY_CODE));
+CREATE TABLE SALESREP(SALESREP_ID CHAR(4) CONSTRAINT SALESREP_ID_PK PRIMARY KEY,
+                      SALESREP_NAME varchar(20),
+                      SALESREP_DOJ DATE,
+                      MGR CHAR(4),
+                      BRANCH_CODE CHAR(4) REFERENCES BRANCH(BRANCH_CODE),
+                      SALARY DECIMAL(10,2));
+CREATE TABLE PRODUCT(PRODUCT_CODE CHAR(4) CONSTRAINT PRODUCT_CODE_PK PRIMARY KEY,
+                     PROD_DESC varchar(30),
+                     CATEGORY_CODE CHAR(4) REFERENCES CATEGORY(CATEGORY_CODE),
+                     PRICE DECIMAL(10,2),
+                     QTY_ON_HAND INTEGER);
+CREATE TABLE ORDER_MASTER(ORDER_CODE CHAR(4) CONSTRAINT ORDER_MASTER_CODE_PK PRIMARY KEY,
+                          ORDER_DATE DATE,
+                          SALESREP_ID CHAR(4) REFERENCES SALESREP(SALESREP_ID),
+                          CUSTOMER_CODE CHAR(4) REFERENCES CUSTOMER(CUSTOMER_CODE));
+CREATE TABLE ORDER_DETAIL(ORDER_CODE CHAR(4) REFERENCES ORDER_MASTER(ORDER_CODE),
+                          PRODUCT_CODE CHAR(4) REFERENCES PRODUCT(PRODUCT_CODE),
+                          QTY_ORDERED INTEGER,
+                          CONSTRAINT ORDER_DETAILS_COMP_PK PRIMARY KEY(ORDER_CODE,PRODUCT_CODE));
+
+INSERT INTO COUNTRY VALUES('CY01','INDIA','SOUTHERN');
+
+INSERT INTO COUNTRY VALUES('CY02','FRANCE','EUROPEAN');
+
+INSERT INTO COUNTRY VALUES('CY03','GERMANY','EUROPEAN');
+
+INSERT INTO COUNTRY VALUES('CY04','PAKISTAN','SOUTHERN');
+
+INSERT INTO COUNTRY VALUES('CY05','NETHERLANDS','EUROPEAN');
+
+INSERT INTO CATEGORY VALUES('CT01','COMPUTER PERIPHERALS');
+
+INSERT INTO CATEGORY VALUES('CT02','MOBILE');
+
+INSERT INTO CATEGORY VALUES('CT03','HOUSEHOLD APPLIANCES');
+
+INSERT INTO CATEGORY VALUES('CT04','ELECTRONIC GADGETS');
+
+INSERT INTO CUSTOMER VALUES('CU01','VIVEK&SONS',2000000);
+
+INSERT INTO CUSTOMER VALUES('CU02','CITIZEN',100000);
+
+INSERT INTO CUSTOMER VALUES('CU03','CHAND CO',500000);
+
+INSERT INTO CUSTOMER VALUES('CU04','SPENCER',1000000);
+
+INSERT INTO CUSTOMER VALUES('CU05','RAMCO RETAILS',400000);
+
+INSERT INTO CUSTOMER VALUES('CU06','SHOPPING ZONE',300000);
+
+INSERT INTO CUSTOMER VALUES('CU07','STYLES',700000);
+
+INSERT INTO CUSTOMER VALUES('CU08','SARATHAS',900000);
+
+INSERT INTO CUSTOMER VALUES('CU09','DUPLEX',300000);
+
+INSERT INTO CUSTOMER VALUES('CU10','RAJA&RAJA',100000);
+
+INSERT INTO BRANCH VALUES('BR01','CHENNAI','CY01');
+
+INSERT INTO BRANCH VALUES('BR02','PARIS','CY02');
+
+INSERT INTO BRANCH VALUES('BR03','HAMBAURG','CY03');
+
+INSERT INTO BRANCH VALUES('BR04','MUMBAI','CY01');
+
+INSERT INTO BRANCH VALUES('BR05','ISLAMABAD','CY04');
+
+INSERT INTO BRANCH VALUES('BR06','EINDHOVEN','CY05');
+
+INSERT INTO SALESREP VALUES('SP01','PRIYA','2005-03-22','SP03','BR01',25000);
+
+INSERT INTO SALESREP VALUES('SP02','MADHAN','2003-05-12','SP03','BR01',35000);
+
+INSERT INTO SALESREP VALUES('SP03','ACHU','2000-06-04',NULL,'BR02',50000);
+
+INSERT INTO SALESREP VALUES('SP04','RENU','2009-08-10','SP02','BR03',20000);
+
+INSERT INTO SALESREP VALUES('SP05','SANTHIYA','2008-10-01','SP01','BR04',15000);
+
+INSERT INTO SALESREP VALUES('SP06','HEMA','2005-12-07','SP04','BR05',22000);
+
+INSERT INTO SALESREP VALUES('SP07','NITHYA','2006-01-06','SP05','BR06',12000);
+
+INSERT INTO SALESREP VALUES('SP08','SHANTHI','2007-02-07','SP05','BR04',18000);
+
+INSERT INTO PRODUCT VALUES('PR01','INTEL PROCESSOR','CT01',10000,150);
+
+INSERT INTO PRODUCT VALUES('PR02','HP MONITOR','CT01',15000,200);
+
+INSERT INTO PRODUCT VALUES('PR03','IBM MONITOR','CT01',12000,200);
+
+INSERT INTO PRODUCT VALUES('PR04','SAMSUNG C3060','CT02',4000,550);
+
+INSERT INTO PRODUCT VALUES('PR05','NOKIA NSERIES','CT02',15000,100);
+
+INSERT INTO PRODUCT VALUES('PR06','LG TOUCHSCREEN','CT02',17000,170);
+
+INSERT INTO PRODUCT VALUES('PR07','SONYERICSON CORBY','CT02',7000,290);
+
+INSERT INTO PRODUCT VALUES('PR08','WHIRPOOL FRIDGE','CT03',10000,120);
+
+INSERT INTO PRODUCT VALUES('PR09','WHIRPOOL WASHINGMACHINE','CT03',15000,75);
+
+INSERT INTO PRODUCT VALUES('PR10','LG FLATSCREEN','CT03',10000,50);
+
+INSERT INTO PRODUCT VALUES('PR11','GOOREJ FRIGDE','CT03',10000,110);
+
+INSERT INTO PRODUCT VALUES('PR12','LG FRIDGE','CT03',8000,170);
+
+INSERT INTO PRODUCT VALUES('PR13','WHIRPOOL AC','CT03',20000,220);
+
+INSERT INTO PRODUCT VALUES('PR14','VOLTAS AC','CT03',30000,125);
+
+INSERT INTO PRODUCT VALUES('PR15','PANASONIC TV','CT03',12000,50);
+
+INSERT INTO ORDER_MASTER VALUES('OR01','2008-03-06','SP01','CU01');
+
+INSERT INTO ORDER_MASTER VALUES('OR02','2009-04-12','SP01','CU02');
+
+INSERT INTO ORDER_MASTER VALUES('OR03','2010-03-16','SP02','CU01');
+
+INSERT INTO ORDER_MASTER VALUES('OR04','2007-01-01','SP02','CU03');
+
+INSERT INTO ORDER_MASTER VALUES('OR05','2009-02-07','SP04','CU04');
+
+INSERT INTO ORDER_MASTER VALUES('OR06','2008-12-07','SP05','CU05');
+
+INSERT INTO ORDER_MASTER VALUES('OR07','2008-11-07','SP04','CU06');
+
+INSERT INTO ORDER_MASTER VALUES('OR08','2009-05-27','SP01','CU02');
+
+INSERT INTO ORDER_MASTER VALUES('OR09','2010-03-31','SP06','CU01');
+
+INSERT INTO ORDER_MASTER VALUES('OR10','2000-09-11','SP05','CU07');
+
+INSERT INTO ORDER_MASTER VALUES('OR11','2010-07-02','SP07','CU09');
+
+INSERT INTO ORDER_MASTER VALUES('OR12','2010-08-02','SP08','CU09');
+
+INSERT INTO ORDER_DETAIL VALUES('OR01','PR01',20);
+
+INSERT INTO ORDER_DETAIL VALUES('OR01','PR02',10);
+
+INSERT INTO ORDER_DETAIL VALUES('OR01','PR03',20);
+
+INSERT INTO ORDER_DETAIL VALUES('OR02','PR01',10);
+
+INSERT INTO ORDER_DETAIL VALUES('OR03','PR04',50);
+
+INSERT INTO ORDER_DETAIL VALUES('OR04','PR05',45);
+
+INSERT INTO ORDER_DETAIL VALUES('OR04','PR01',12);
+
+INSERT INTO ORDER_DETAIL VALUES('OR05','PR06',18);
+
+INSERT INTO ORDER_DETAIL VALUES('OR06','PR07',22);
+
+INSERT INTO ORDER_DETAIL VALUES('OR07','PR08',25);
+
+INSERT INTO ORDER_DETAIL VALUES('OR08','PR09',40);
+
+INSERT INTO ORDER_DETAIL VALUES('OR01','PR10',15);
+
+INSERT INTO ORDER_DETAIL VALUES('OR09','PR10',10);
+
+INSERT INTO ORDER_DETAIL VALUES('OR10','PR01',5);
+
+INSERT INTO ORDER_DETAIL VALUES('OR10','PR15',25);
+
+INSERT INTO ORDER_DETAIL VALUES('OR11','PR15',30);
+
+INSERT INTO ORDER_DETAIL VALUES('OR12','PR08',55);
+
+INSERT INTO ORDER_DETAIL VALUES('OR12','PR12',40);
+
+COMMIT;
+
+
+--1)
+SELECT COUNT(CATEGORY_CODE)
+FROM PRODUCT
+GROUP BY CATEGORY_CODE
+HAVING COUNT(CATEGORY_CODE)>=ALL(SELECT COUNT(CATEGORY_CODE)
+                              FROM PRODUCT
+                              GROUP BY CATEGORY_CODE)
+--2)
+SELECT CATEGORY_CODE
+FROM CATEGORY
+WHERE CATEGORY_CODE NOT IN(SELECT CATEGORY_CODE
+                            FROM PRODUCT)
+--3)
+SELECT PRODUCT_CODE, PRICE
+FROM PRODUCT
+WHERE PRICE=(SELECT MAX(PRICE)
+             FROM PRODUCT)
+--4)
+SELECT*
+FROM PRODUCT
+
+SELECT SUM(QTY_ON_HAND),CATEGORY_CODE
+FROM PRODUCT
+GROUP BY CATEGORY_CODE
+HAVING SUM(QTY_ON_HAND)>=ALL(SELECT SUM(QTY_ON_HAND)
+                            FROM PRODUCT
+                            GROUP BY CATEGORY_CODE)
+
+--5)
+SELECT product_code,category_code,PRICE,prod_desc
+FROM product P1
+WHERE price=(SELECT MAX(PRICE)
+	     FROM PRODUCT P2
+	     WHERE P2.CATEGORY_CODE=P1.CATEGORY_CODE)
+
+
+--6)
+SELECT product_code,qty_on_hand,category_code
+FROM product
+WHERE qty_on_hand IN(SELECT MIN(QTY_ON_HAND)
+                     FROM PRODUCT
+                     GROUP BY CATEGORY_CODE)
+
+ --7)
+ SELECT*
+FROM ORDER_DETAIL
+
+SELECT order_code
+FROM ORDER_DETAIL
+GROUP BY order_code
+HAVING COUNT(product_code)>=ALL(SELECT COUNT(product_code)
+                                FROM ORDER_DETAIL
+                                GROUP BY order_code)
+
+--8)
+SELECT product_code
+FROM ORDER_DETAIL
+GROUP BY product_code
+HAVING COUNT(product_code)>=ALL(SELECT COUNT(product_code)
+                                FROM ORDER_DETAIL
+                                GROUP BY product_code)
+
+SELECT PROD_DESC
+FROM PRODUCT
+WHERE PRODUCT_CODE='PR01'
+
+--9)
+SELECT product_code
+FROM ORDER_DETAIL
+GROUP BY product_code
+HAVING COUNT(product_code)<=ALL(SELECT COUNT(product_code)
+                                 FROM ORDER_DETAIL
+                                 GROUP BY product_code)
+
+
+--select * from order_detail order by order_code
+
+--select product_code, count(order_code) as ordercount from order_detail group by product_code order by ordercount
+
+--select order_code,count(product_code)as prodcount from order_detail group by order_code order by prodcount
+
+--13)
+
+FROM PRODUCT
+GROUP BY CATEGORY_CODE
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+SELECT*
+FROM order_master
+
+SELECT customer_code, COUNT(ORDER_CODE) AS NO_OF_ORDERS
+FROM ORDER_MASTER
+GROUP BY CUSTOMER_CODE
+ORDER BY NO_OF_ORDERS DESC
+
+--10)
+SELECT order_detail.order_code,SUM(ORDER_DETAIL.qty_ordered*PRODUCT.price) as BILL
+FROM ORDER_DETAIL,PRODUCT
+WHERE ORDER_DETAIL.PRODUCT_CODE=PRODUCT.PRODUCT_CODE
+GROUP BY ORDER_DETAIL.ORDER_CODE
+HAVING SUM(ORDER_DETAIL.QTY_ORDERED*PRODUCT.PRICE)>=
+ALL(SELECT SUM(ORDERDETAIL.QTY_ORDERED*PRODUCT.PRICE)
+    FROM ORDER_DETAIL ORDERDETAIL,PRODUCT PRODUCT
+    WHERE ORDERDETAIL.PRODUCT_CODE=PRODUCT.PRODUCT_CODE
+    GROUP BY ORDERDETAIL.ORDER_CODE)
+
+--12)
+SELECT customer.customer_name,ordermaster.order_code,ordermaster.order_date,orderdetail.qty_ordered,orderdetail.qty_ordered*product.price as BILL
+FROM Customer customer INNER JOIN ORDER_MASTER ordermaster
+ON customer.customer_code=ordermaster.customer_code
+INNER JOIN ORDER_DETAIL orderdetail
+ON ordermaster.order_code=orderdetail.order_code
+INNER JOIN PRODUCT product
+ON orderdetail.product_code=product.product_code
+
+--11)
+SELECT*
+FROM order_master
+
+
+SELECT customer_code
+FROM ORder_master
+WHERE order_code IN (
+
+			SELECT ordermaster.order_code
+			FROM ORDER_MASTER ordermaster INNER JOIN ORDER_DETAIL orderdetail
+			ON ordermaster.order_code=orderdetail.order_code
+			INNER JOIN PRODUCT product
+			ON orderdetail.product_code=product.product_code
+			 WHERE ordermaster.order_date='2007-01-01'
+			GROUP BY ordermaster.order_code
+			HAVING  SUM(orderdetail.qty_ordered*product.price)>=ALL(SELECT SUM(orderdetail.qty_ordered*product.price)
+								     FROM ORDER_DETAIL orderdetail INNER JOIN ORDER_MASTER ordermaster
+								     ON ordermaster.order_code=orderdetail.order_code
+								     INNER JOIN PRODUCT product
+								     ON orderdetail.product_code=product.product_code
+								     WHERE ordermaster.order_date='2007-01-01'
+								     GROUP BY ordermaster.order_code)
+		 )
+
+
+
+--14)Display the sales rep that who processed the orders ORD11 and ORD15.
+
+
+SELECT*
+FROM SALESREP
+
+
+
+SELECT salesrep.salesrep_id,salesrep.salesrep_name
+FROM SALESREP salesrep INNER JOIN ORDER_MASTER ordermaster
+ON salesrep.salesrep_id=ordermaster.salesrep_id
+WHERE ordermaster.order_code='OR11' OR ordermaster.order_code='OR15'
+GROUP BY salesrep.salesrep_id, salesrep.salesrep_name
+
+
+--15)
+
+SELECT sales.salesrep_name||' WORKS FOR '||saless.salesrep_name as MANAGER
+FROM salesrep sales JOIN salesrep saless
+ON saless.salesrep_id=sales.mgr
+
+--16)
+
+SELECT*
+FROM product
+
+SELECT*
+FROM order_detail
+
+SELECT*
+FROM order_master
+
+CREATE or replace FUNCTION totalsalesprocessed(salesrepid character(4),date DATE)
+RETURNS DECIMAL
+AS
+$$
+  DECLARE totalsales DECIMAL; 
+BEGIN
+
+                        
+                        SELECT SUM(orderdetail.qty_ordered*product.price) INTO totalsales 
+                        FROM ORDER_MASTER ordermaster
+                        INNER JOIN ORDER_DETAIL orderdetail
+			ON ordermaster.order_code=orderdetail.order_code
+			INNER JOIN PRODUCT product
+			ON orderdetail.product_code=product.product_code
+			WHERE ordermaster.order_date= date AND ordermaster.salesrep_id=salesrepid
+			GROUP BY ordermaster.salesrep_id;
+
+
+			RETURN totalsales;							
+
+
+
+END
+$$ 
+LANGUAGE PLPGSQL
+
+
+SELECT totalsalesprocessed('SP02','2010-03-16')
+
+--16) another way i.e to find no.of orders processed by him on that day
+
+   CREATE OR REPLACE FUNCTION total_saless(salesrepid CHARACTER(10),orderdate dATE)
+   RETURNS INTEGER
+   AS
+   $TOTALSALE_INTEGER$
+   DECLARE totalsale INT;
+   BEGIN 
+   SELECT COUNT(order_master.order_code) INTO totalsale
+   FROM order_master    
+   WHERE order_master.order_date = orderdate AND order_master.salesrep_id=salesrepid
+   GROUP BY order_master.salesrep_id;
+   RETURN totalsale;
+   END;
+     $TOTALSALE_INTEGER$
+    LANGUAGE plpgsql;
+
+   SELECT total_saless('SP01','2008-03-06');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                            

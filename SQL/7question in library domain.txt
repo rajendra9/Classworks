@@ -1,0 +1,15 @@
+SELECT members1.member_id,members1.member_dept
+FROM MEMBERS members1 INNER JOIN BOOK_TRANSACTION book_transaction1
+ON members1.member_id=book_transaction1.member_id
+GROUP BY members1.member_id
+HAVING members1.member_id=(SELECT members2.member_id
+                         FROM MEMBERS members2 INNER JOIN BOOK_TRANSACTION book_transaction2
+                         ON members2.member_id=book_transaction2.member_id
+                         WHERE members2.member_dept=members1.member_dept
+                         GROUP BY members2.member_id
+                         HAVING COUNT(members2.member_id)>=ALL(SELECT COUNT(members2.member_id)
+                                                               FROM MEMBERS members2 INNER JOIN BOOK_TRANSACTION book_transaction2
+                                                               ON members2.member_id=book_transaction2.member_id
+                                                               WHERE members2.member_dept=members1.member_dept
+                                                               GROUP BY members2.member_id)
+                          )
