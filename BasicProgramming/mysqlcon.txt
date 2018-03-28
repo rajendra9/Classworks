@@ -1,0 +1,4 @@
+val url = "jdbc:mysql://localhost:8889/mysql"
+    val driver = "com.mysql.jdbc.Driver"
+    val username = "root"
+    val password = "root"

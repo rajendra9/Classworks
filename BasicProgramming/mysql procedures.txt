@@ -1,0 +1,89 @@
+CREATE PROCEDURE `hr`.`my_proc_CASE` 
+(INOUT no_employees INT, IN salary INT)
+BEGIN
+CASE
+WHEN (salary>10000) 
+THEN (SELECT COUNT(job_id) INTO no_employees 
+FROM jobs 
+WHERE min_salary>10000);
+WHEN (salary<10000) 
+THEN (SELECT COUNT(job_id) INTO no_employees 
+FROM jobs 
+WHERE min_salary<10000);
+ELSE (SELECT COUNT(job_id) INTO no_employees 
+FROM jobs WHERE min_salary=10000);
+END CASE;
+END$$
+
+**************************************************
+CREATE PROCEDURE demoSp(IN inputParam VARCHAR(255),INOUT inOutParam INT)
+BEGIN
+    DECLARE z INT;
+    SET z = inOutParam + 1;
+    SET inOutParam = z;
+    SELECT inputParam;
+    SELECT CONCAT('zyxw', inputParam);
+END
+
+
+***************************************************
+import java.sql.CallableStatement;
+//Inside func
+
+   CallableStatement cStmt = conn.prepareCall("{call demoSp(?, ?)}");
+   cStmt.setString(1, "abcdefg");
+
+
+******************************************************************
+1. Create the following procedure in mysql
+CREATE PROCEDURE `booksdb`.`create_author` (IN name VARCHAR(45), email VARCHAR(45))
+BEGIN
+    DECLARE newAuthorID INT;
+     
+    INSERT INTO author (name, email) VALUES (name, email);
+     
+    SET newAuthorID = (SELECT author_id FROM author a WHERE a.name = name);
+     
+    INSERT INTO book (title, description, published, author_id, price, rating)
+        VALUES (CONCAT('Life Story of ', name),
+                CONCAT('Personal Stories of ', name),
+                date('2016-12-30'), newAuthorID, 10.00, 0);
+END
+
+
+import java.sql.*;
+ 
+/**
+ * A Java program demonstrates how to call a MySQL stored procedure
+ * using JDBC.
+ *
+ * @author www.codejava.net
+ */
+public class StoredProcedureCallExample1 {
+ 
+    public static void main(String[] args) {
+        String dbURL = "jdbc:mysql://localhost:3306/booksdb";
+        String user = "root";
+        String password = "P@ssw0rd";
+ 
+ 
+        try (
+ 
+            Connection conn = DriverManager.getConnection(dbURL, user, password);
+ 
+            CallableStatement statement = conn.prepareCall("{call create_author(?, ?)}");
+        ) {
+ 
+            statement.setString(1, "Bill Gates");
+            statement.setString(2, "bill@microsoft.com");
+ 
+            statement.execute();
+            statement.close();
+ 
+            System.out.println("Stored procedure called successfully!");
+ 
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+}

@@ -1,0 +1,12 @@
+Oct 04, 2017 3:20:30 PM bankProj.BankLogger$ StatusLogger
+SEVERE: 1001 Account Creation : Success
+Oct 04, 2017 3:20:30 PM bankProj.BankLogger$ StatusLogger
+SEVERE: 1002 Account Creation : Success
+Oct 04, 2017 3:20:30 PM bankProj.BankLogger$ StatusLogger
+SEVERE: 1001 DepositMoney : Success
+Oct 04, 2017 3:20:30 PM bankProj.BankLogger$ StatusLogger
+SEVERE: 1001 MoneyTransfer : Success
+Oct 04, 2017 3:20:30 PM bankProj.BankLogger$ StatusLogger
+SEVERE: 1001 Account Deletion : Success
+Oct 04, 2017 3:20:30 PM bankProj.BankLogger$ StatusLogger
+SEVERE: Display : bankProj.InvalidAccountException

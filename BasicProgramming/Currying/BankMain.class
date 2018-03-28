@@ -1,0 +1,27 @@
+object BankMain {
+          def main(args : Array[String]){
+
+                            var bank = new Bank();
+                            
+                            println(bank.addAccount(new BankAccount(10432,"AAA",1234.56)));
+                            println(bank.addAccount(new BankAccount(19543,"BBB",2345.67)));
+                            println(bank.addAccount(new BankAccount(15744,"CCC",3456.78)));
+                            println(bank.addAccount(new BankAccount(17145,"DDD",5651.80)));
+                            println(bank.addAccount(new BankAccount(17145,"DDD",5651.80)));
+                                                    
+                            println(bank.displayAccount(10432)+"\n"+bank.displayAccount(19543)+"\n"+bank.displayAccount(15744)+"\n"+bank.displayAccount(17145)+"\n")
+                            
+                            println(bank.depositMoney(10432, 10000.0))
+                            println(bank.withdrawMoney(15744, 500.25))
+                            println(bank.displayAccount(10432)+"\n"+bank.displayAccount(19543)+"\n"+bank.displayAccount(15744)+"\n"+bank.displayAccount(17145)+"\n")
+                            
+                            println(bank.transferMoney(10432, 19543, 3000))
+                            println(bank.transferMoney1(10432) (19543) (1000))
+                            println(bank.deleteAccount(17145))
+                            
+                           println(bank.displayAccount(10432)+"\n"+bank.displayAccount(19543)+"\n"+bank.displayAccount(15744)+"\n"+bank.displayAccount(17145)+"\n")
+                            
+               
+                
+          }
+}

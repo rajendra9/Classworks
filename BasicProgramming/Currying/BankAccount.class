@@ -1,0 +1,27 @@
+
+
+class BankAccount( ) {
+  
+    private  var AccNo : Int=1;
+    private [BankAccount] var Name  : String="a";
+    private [BankAccount] var Amount : Double=1.1;
+    
+    def this(accNo : Int  , name  :String , amt : Double){
+          this()
+          this.AccNo=accNo
+          this.Name=name
+          this.Amount=amt
+    }
+      
+      def accNo_set (accNo : Int) = this.AccNo=accNo
+      def name_set (name : String) = this.Name=name
+      def amt_set (amt : Double) = this.Amount=amt
+      
+      def accNo_get () : Int = return AccNo
+      def name_get () : String = return Name
+      def amt_get () : Double = return Amount
+      
+      override def toString() : String = return " AccNO:  "+AccNo+"   Name:  "+Name+"   Amount:  "+Amount 
+      
+   
+}
