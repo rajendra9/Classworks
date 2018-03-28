@@ -1,0 +1,77 @@
+class Pattern{
+    def eligibilityCheck(age:Int):Any={
+      
+      age match{
+      case value if value>=18 =>"You are eligible to vote"
+      case value if value>=1 =>"Youre to young to vote"
+      case _ => age
+    }
+  }
+}
+object PatternMatcher {
+
+  def main(args: Array[String]): Unit = {
+    val age= -20
+    val patObj=new Pattern()
+   println( patObj.eligibilityCheck(age))
+  }
+  
+}
+
+-------------------------------------------------
+
+    val dates ="2018-03-28,2018-03-20,2017-05-28"
+    val dates1="12/02/02"
+    val date=new Regex("\\d\\d\\d\\d-\\d\\d-\\d\\d")
+    val firstDate= date.findFirstIn(dates1)
+    println(firstDate)
+
+
+------------------------------------------
+import scala.util.matching.Regex
+import scala.util.matching.Regex._
+import scala.util.matching
+object PatternMatcher{
+  def main(args: Array[String]): Unit = {
+    val date=new Regex("\\d\\d\\d\\d-\\d\\d-\\d\\d")
+    val dates ="2018-03-28,2018-03-20,2017-05-28"
+    val datesInList=date.findAllIn(dates)
+    println(datesInList)
+    while(datesInList.hasNext){
+        println(datesInList.next())    
+ 
+    }
+  }
+}
+
+
+-------------------------------------
+
+import scala.util.matching.Regex
+import scala.util.matching.Regex._
+import scala.util.matching
+import scala.io.Source
+case class Employee(id:Int,name:String,salary:Double)
+ class EmployeeMatcher{ 
+  def makeEmp(line:String):Employee={
+    println("Make Employee called")        
+    val emp=line.split(",")
+    val empId:Int=emp(0).toInt
+    val empName=emp(1)
+    val empSalary=emp(2).toDouble
+    Employee(empId,empName,empSalary)
+  }
+}
+object PatternMatcher{
+  def main(args: Array[String]): Unit = {
+   val mapEmp=new EmployeeMatcher() 
+   val source=Source.fromFile("D:\\Srilakshmi\\Scala\\sampEmp.txt")
+   val lines=source.getLines()
+   val emps=lines.map(mapEmp.makeEmp)
+   // emps.foreach(println)
+    println(emps.map(_.salary).sum)
+       source.close()
+  }
+}
+
+
