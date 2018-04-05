@@ -1,0 +1,64 @@
+
+1. Take a log file as an input and print the no of errors in that log file.
+val data = spark.read.textFile("log_file.txt").rdd
+val mapFile = data.flatMap(lines => lines.split(" ")).filter(value => value=="error")
+println(mapFile.count())
+
+
+2. Combine the errors and warnings of any log file and print it.
+val data = spark.read.textFile("log_file.txt").rdd
+val rdd1 = data.flatMap(lines => lines.split("\n")).filter(value => value.contains("error"))
+val rdd2 = data.flatMap(lines => lines.split("\n")).filter(value => value.contains("warning"))
+val rddUnion = rdd1.union(rdd2)
+rddUnion.foreach(println)
+
+3. Compute the total amount spent per customer in some fake e-commerce data file(customer-orders.csv) and identify the top customer on the basis of amount spent.
+
+import org.apache.spark
+import org.apache.spark._
+
+object TopCustomer {
+  def splitWords(line:String)={
+	var list = line.split(",")
+	(list(0).toInt,list(2).toFloat)
+}
+def main(args: Array[String]): Unit = {
+  val sc= new SparkContext(new SparkConf().setAppName("TopCustomer"))
+  val data = sc.textFile("customer-orders.csv")
+  val map1 = data.map(splitWords)
+  //map1.foreach(println)
+  val map2 = map1.reduceByKey((x,y) => x+y)
+  //map2.foreach(println)
+  val map3 = map2.map(x => (x._2,x._1))
+  val sorted = map3.sortByKey()
+  val top = sorted.top(1)
+  top.foreach(println)
+  }
+}
+
+
+4. Find the minimum temperature from the recordings given in 1800.csv
+
+import org.apache.spark
+import org.apache.spark._
+
+object MinTemp {
+  def splitDegree(line:String)={
+	var list = line.split(",")
+	(list(3).toInt)
+}
+  
+def main(args: Array[String]): Unit = {
+  val sc= new SparkContext(new SparkConf().setAppName("MinTemp"))
+  val data = sc.textFile("1800.csv")
+  val map1 = data.map(splitDegree)
+  val minTemp = map1.min()
+  val maxTemp = map1.max()
+  println("Mininum Temperature is: " + minTemp)
+  println("Maximum Temperature is: " + maxTemp)
+  }
+}
+
+
+
+

@@ -1,0 +1,6 @@
+101,srilakshmi,28,Training
+102,Narmadha,27,Training
+103,Rajamayili,25,Projects
+104, Mahalakshmi,22,Projects
+105, Avinash,22,Projects
+106,Karthi,23,Projects

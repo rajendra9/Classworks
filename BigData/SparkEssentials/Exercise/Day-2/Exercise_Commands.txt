@@ -1,0 +1,24 @@
+import org.apache.spark.sql.SparkSession
+
+Exercises on DataFrames:
+
+1. Find all rows where answer_count in (5, 10, 20) and also count how many rows match answer_count in (5, 10, 20). 
+
+val dfQuestionsCSV=spark.read.csv("questions.csv")
+val dfQuestionsCSV1 = spark.read.option("dateFormat","yyyy-MM-dd HH:mm:ss").csv("questions.csv").toDF("id", "creation_date", "closed_date", "deletion_date", "score", "owner_userid", "answer_count")
+
+val rdd1 = dfQuestionsCSV.filter("answer_count in (5,10,20)").rdd
+rdd1.foreach(println)		// Print all the rows where answer_count in (5, 10, 20)
+rdd1.count()			// Display the count where answer_count in (5, 10, 20)
+
+2. Compute the mean of the score column using dfQuestions Sample data.
+
+dfQuestionsCSV.select(mean("score")).show
+
+
+3. Find all questions where id > 400 and id < 450, filter out any null in column owner_userid, join with dfTags on the id column, group by owner_userid and calculate the average score column and the minimum answer_count column using dfQuestions and dfTags sample data.
+
+val dfQuestionsSubset = dfQuestionsCSV.filter("id > 400 and id < 450").toDF().filter("owner_userid != 'NA'")
+dfQuestionsSubset.show()
+
+dfQuestionsSubset.join(dfTags, "id").groupby("owner_userid").agg(avg("score"),min("answer_count")).show()

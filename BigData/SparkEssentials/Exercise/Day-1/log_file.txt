@@ -1,0 +1,9 @@
+log files
+Error : Severe error occured in line 32
+Error	: Exception error occured in line 34
+Error	: Exception error occured in line 34
+Error	: Severe error occured in line 32
+Warning	: INFO warning in line 36
+Warning	: INFO warning in line 44
+Total no. of errors in this module	 : 3 errors
+Total no. of warnings in this module	 : 2 warnings

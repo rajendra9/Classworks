@@ -1,0 +1,6 @@
+df.write.format("com.databricks.spark.csv").option("header", "true").save("file.csv")
+
+df.map(x => x.mkString("|")).saveAsTextFile("file.csv") 
+
+df.write.text("/path/to/output")
+df.write().csv(“/path/to/save/the/file”) 

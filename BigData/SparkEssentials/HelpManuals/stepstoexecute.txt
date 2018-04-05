@@ -1,0 +1,7 @@
+ 
+Execute the following command from spark_home:
+
+spark-submit --class com.htc.training.spark.customer --master local /usr/local/documentsFortesting/SparkLearning.jar /usr/local/documentsFortesting/customer-orders.csv /usr/local/documentsFortesting/output001
+
+
+spark-submit --class com.htc.training.spark.MinTemp --master local /usr/local/documentsFortesting/SparkLearning.jar /usr/local/documentsFortesting/1800.csv /usr/local/documentsFortesting/output002
