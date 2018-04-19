@@ -1,0 +1,24 @@
+Client side javascript framework.
+
+1.6 as part of this training.
+
+DOM manipulation
+If you are familier with traditional javascript dom or using frameowkr like jquery, all of your business logic is always work with dom manipulatuon.  adding element, revoidn glements, hide elements..etc. any kind of opeations you want to make as part of dom maniplations... that part shuld be sperated form the busines slgoc or papplicatin logic 
+which is essentially talk to web services like rest services.
+
+MVC pattern
+Angular JS follows much of MVC pattern.
+we have models which is having data
+view - DOM, with all kinds of diretives, you can say plain html 
+controllers will be having business logic, which need to worked with Webservices/Rest Services
+	get in touch with server.
+	controllers put data fectehc into model and and bind model to view.
+	
+In this way each of these components works seperately, and can be tested seperately.
+
+SPA Applications
+If you are familier with JSP, asp.nent applciations. 
+
+Process
+--------------
+Angular
