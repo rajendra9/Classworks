@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html data-ng-app="peopleApp">
+<head>
+<meta charset="utf-8">
+
+<title>Angular-JS Second Example</title>
+</head>
+<body data-ng-app="">
+ <div  data-ng-controller="PeopleController"  align="center">
+   <br/>
+   <h2>People Information Search</h2>
+  Enter People-Id:<input type="text" data-ng-model="peopleId" />
+  <h1>Searched Data</h1>
+   <div data-ng-repeat="x in people">
+     <div data-ng-if="x.id==peopleId">
+      <strong>Name:&nbsp;&nbsp;{{x.name}}</strong><br/>
+      <strong>Salary:&nbsp;&nbsp;{{x.salary}}</strong><br/>
+      <strong>Job:&nbsp;&nbsp;{{x.job}}</strong>
+    </div>
+  </div>
+ 
+ <script src="scripts/angular.js" type="text/javascript">
+</script>
+<script>
+  var peopleApp = angular.module('peopleApp',[]);
+   peopleApp.controller('PeopleController',function($scope){
+     $scope.peopleId = 0;
+     $scope.people=[
+       {id:324, name:'Suguna Rao', job:'Developer',salary:26500.0},
+       {id:354, name:'Madhavan',job:'Analyst',salary:25500.0},
+       {id:423, name:'Kadirvan',job:'Developer',salary:26500.0},
+       {id:445, name:'Karthick',job:'Asst Manager',salary:27500.0},
+       {id:465, name:'Satya',job:'Project Manager',salary:47005.5},
+       {id:476, name:'Sumana',job:'Project Lead',salary:33005.5}     
+      ];  
+  });
+</script>
+</div>
+</body>
+</html>
