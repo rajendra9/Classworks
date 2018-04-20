@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+
+<title>Angular-JS ng-class Example</title>
+<link rel="stylesheet" href="styles/simpStyle.css">
+</head>
+<body data-ng-app>
+ <div  align="center">
+   <p data-ng-class="{c1: style1, c2: style2,  c3:style3}" >
+   In a move that is certain to spread cheer 
+   among city residents,<br/>Chennai Metro Rail Limited (CMRL) 
+   has started returning parks it<br/>
+   had acquired for construction.
+   It will also fund their restoration.<br/>
+   It has already handed over a park 
+   in Ashok Nagar to the city corporation. <br/>
+   A corporation official said 
+   they had started restoration work last week. 
+   <br/>"Metro rail has asked us to prepare an estimate 
+   so that it can hand over the money.<br/> The restoration 
+   is expected to be completed in three months 
+   at a cost of 40 lakh." 
+   </p>
+   <br/><br/>
+   <input type="checkbox"  data-ng-model="style1"  >class c1<br/><br/>
+   <input type="checkbox"  data-ng-model="style2"  >class c2<br/><br/>
+   <input type="checkbox"  data-ng-model="style3"  >class c2<br/><br/>
+   <br/>
+   <p data-ng-class="[style_1, style_2, style_3]">
+   The other parks to be handed back for restoration<br/>
+   include Thiru-Vi-Ka Park in Shenoy Nagar,<br/>
+   Nehru Park on Poonamallee High Road, <br/>
+   and May Day Park in Chintadripet.
+   </p><br/><br/> 
+   enter Style1:&nbsp;&nbsp;<input type="text" data-ng-model="style_1" /><br/> 
+   enter Style2:&nbsp;&nbsp;<input type="text" data-ng-model="style_2" /><br/> 
+   enter Style3:&nbsp;&nbsp;<input type="text" data-ng-model="style_3" /><br/> 
+   <br/>
+   <p data-ng-class="myStyle">
+   In 2008, the corporation spent 1.67 crore on <br/>
+   the beautification of Thiru Vi Ka Park in Shenoy Nagar<br/>
+   but had to hand it over to metro rail work.<br/>
+   Now, the civic body hopes <br/>
+   Chennai Metro Rail Ltd will either take up <br/>
+   the restoration or pay the money for the work." 
+   </p>
+   <input type="radio" data-ng-model="myStyle" value="c1">class-one<br/>
+   <input type="radio" data-ng-model="myStyle" value="c2">class-one<br/>
+   <input type="radio" data-ng-model="myStyle" value="c3">class-one<br/>
+ </div>
+ <script src="scripts/angular.js" type="text/javascript">
+</script>
+
+
+</body>
+</html>
