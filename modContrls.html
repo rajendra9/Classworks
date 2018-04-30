@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html data-ng-app="myModApp">
+<head>
+<meta charset="utf-8">
+<title>Angular-JS Module Controllers Example</title>
+<style  type="text/css" >
+ th,td {
+    padding:6px;
+    margin:5px;
+    text-align:center;
+    font-weight:bold;
+    font-size:16px;
+  }
+ th{
+   text-decoration:underline;
+ }
+</style>
+</head>
+<body>
+ <div  data-ng-controller="manageController" align="center"> 
+   <h3> Employee Details</h3>
+  <table>
+  <tr><th>Name</th><th>Job</th><th>Department</th></tr>
+  <tr data-ng-repeat="emp in project.employees | orderBy:'deptId'">   
+   <td>{{emp.name|uppercase}}</td>
+   <td>{{emp.job|lowercase}}</td>
+   <td>{{emp.deptId}}</td>
+  </tr>
+  </table>  
+  <div data-ng-controller="workController">
+   <h2>Task details</h2>
+   <table>
+   <tr data-ng-repeat="task in project.workTasks">
+   <td>{{task.name}}</td>
+   <td>{{task.duration}}</td>
+  </tr>
+  </table>
+  <h3>{{project.moto}}</h3>
+  </div>
+  </div>
+  
+<script src="scripts/angular.js" type="text/javascript">
+</script>
+
+<script src="js/myModCtrls.js" type="text/javascript">
+</script>
+</body>
+</html>
