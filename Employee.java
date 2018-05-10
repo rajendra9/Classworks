@@ -1,22 +1,26 @@
-package code;
+package com.htc.spring4.dto;
+
+import java.util.Date;
 
 public class Employee {
 
 	private int empno;
-	private String firstName;
-	private String lastName;
+	private String empname;
+	private String job;
 	private double salary;
-	private String designation;
+	private Date joindate;
+	private int deptno;
 	
 	public Employee() {}
 
-	public Employee(int empno, String firstName, String lastName, double salary, String designation) {
+	public Employee(int empno, String empname, String job, double salary, Date joindate, int deptno) {
 		super();
 		this.empno = empno;
-		this.firstName = firstName;
-		this.lastName = lastName;
+		this.empname = empname;
+		this.job = job;
 		this.salary = salary;
-		this.designation = designation;
+		this.joindate = joindate;
+		this.deptno = deptno;
 	}
 
 	public int getEmpno() {
@@ -27,24 +31,20 @@ public class Employee {
 		this.empno = empno;
 	}
 
-	public String getFirstName() {
-		return firstName;
+	public String getEmpname() {
+		return empname;
 	}
 
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
+	public void setEmpname(String empname) {
+		this.empname = empname;
 	}
 
-	public String getLastName() {
-		return lastName;
+	public String getJob() {
+		return job;
 	}
 
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
-
-	public String getFullName() {
-		return getFirstName() + " " + getLastName();
+	public void setJob(String job) {
+		this.job = job;
 	}
 
 	public double getSalary() {
@@ -55,67 +55,26 @@ public class Employee {
 		this.salary = salary;
 	}
 
-	public String getDesignation() {
-		return designation;
+	public Date getJoindate() {
+		return joindate;
 	}
 
-	public void setDesignation(String designation) {
-		this.designation = designation;
-	}
-	
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((designation == null) ? 0 : designation.hashCode());
-		result = prime * result + empno;
-		result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
-		result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
-		long temp;
-		temp = Double.doubleToLongBits(salary);
-		result = prime * result + (int) (temp ^ (temp >>> 32));
-		return result;
+	public void setJoindate(Date joindate) {
+		this.joindate = joindate;
 	}
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Employee other = (Employee) obj;
-		if (designation == null) {
-			if (other.designation != null)
-				return false;
-		} else if (!designation.equals(other.designation))
-			return false;
-		if (empno != other.empno)
-			return false;
-		if (firstName == null) {
-			if (other.firstName != null)
-				return false;
-		} else if (!firstName.equals(other.firstName))
-			return false;
-		if (lastName == null) {
-			if (other.lastName != null)
-				return false;
-		} else if (!lastName.equals(other.lastName))
-			return false;
-		if (Double.doubleToLongBits(salary) != Double.doubleToLongBits(other.salary))
-			return false;
-		return true;
+	public int getDeptno() {
+		return deptno;
+	}
+
+	public void setDeptno(int deptno) {
+		this.deptno = deptno;
 	}
 
 	@Override
 	public String toString() {
-		return "Employee [empno=" + empno + ", firstName=" + firstName + ", lastName=" + lastName + ", salary=" + salary
-				+ ", designation=" + designation + "]";
+		return "Employee [empno=" + empno + ", empname=" + empname + ", job=" + job + ", salary=" + salary + ", deptno="
+				+ deptno + "]";
 	}
-
-	
 	
 }
-
